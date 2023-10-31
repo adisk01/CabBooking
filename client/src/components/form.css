@@ -1,0 +1,92 @@
+.container-xl {
+    padding: 20px;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .form-select {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  /* CSS for CabList */
+.CabList {
+    margin-top: 20px;
+  }
+  
+  /* CSS for CabTable */
+  .CabTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border: 1px solid #ccc; /* Add a border for the table */
+  }
+  
+  /* CSS for CabTableHead */
+  .CabTableHead {
+    background-color: #f2f2f2;
+    text-align: center
+  }
+  
+  /* CSS for CabTableHeadCell */
+  .CabTableHeadCell {
+    padding: 8px;
+    text-align: left;
+    text-align: center
+  }
+  
+  /* CSS for CabTableBody */
+  
+  
+  /* CSS for CabTableRow */
+  .CabTableRow:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* CSS for CabTableCell */
+  .CabTableCell {
+    padding: 8px;
+    border: 1px solid #ccc; /* Add a border for the table cells */
+  }
+  
+  
