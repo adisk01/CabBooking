@@ -1,13 +1,14 @@
 // server.js
 require("dotenv").config(); //added
 const express = require("express");
-
+const cors =require("cors");
 const connectDB = require("./config/db"); //added
 
 const pathRouter = require("./routes/path-routes");
 const cabRouter = require("./routes/cab-routes");
 
 const app = express();
+app.use(cors());
 
 // connect database
 connectDB();//added

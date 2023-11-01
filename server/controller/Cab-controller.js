@@ -1,22 +1,30 @@
 const mongoose = require("mongoose");
-const Cab = require("./models/Cab");
+const Cab = require("../models/Cab");
+const { availableCabs } = require("../service/getAvailableCabs");
 
-const getAllCabs = async(req,res,next) =>{
-    let blogs;
-    try{
-        blogs = await Cab.find();
-        console.log(blogs);
-    }catch(e){
-        console.log(e);
-    }
-
-    if(!blogs){
-        return res.status(404).json({message : " No blogs found"});
-    }
-
-    
-
-    return res.status(200).json({blogs});
+const getAllCabs = (req, res) => {
+    Cab.find()
+        .then((todo) => {
+            let data = availableCabs(todo,req.body.time);
+            res.status(200).json(todo);
+        })
+        .catch((err) =>
+            res
+                .status(404)
+                .json({ message: "Cabs not found", error: err.message })
+        );
 }
 
-module.exports = { getAllCabs : getAllCabs } ;
+
+const putUpdateCabs = (req, res) => {
+    Cab.findByIdAndUpdate(req.params.id, req.body)
+        .then((data) => res.json({ message: "updated successfully", data }))
+        .catch((err) =>
+            res
+                .status(400)
+                .json({ message: "Failed to update Cab details", error: err.message })
+        );
+};
+
+
+module.exports = { getAllCabs : getAllCabs, putUpdateCabs : putUpdateCabs } ;
