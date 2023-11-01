@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Button ,Table} from 'react-bootstrap';
 import CabData from "./CabData";
+import EditEntry from "../Modals/ModalForCabs";
 const cabdata = () =>{
+
+    const handleedit = (price) => {
+        localStorage.setItem('Price' , price);
+    }
     return (
+        
         <>
             <div style={{margin:"10rem"}}>
                 <Table striped bordered hover size="sm">
@@ -37,7 +43,8 @@ const cabdata = () =>{
                                             {item.Price}
                                         </td>
                                         <td>
-                                        <Button onClick={() => alert(item._id)} style={{ fontSize: '10px', backgroundColor: 'blue', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '5px'}}>Edit</Button>
+                                        <Button onClick={()=>handleedit(item.Price)}
+                                        >Edit</Button>
 
                                         </td>
                                     </tr>
