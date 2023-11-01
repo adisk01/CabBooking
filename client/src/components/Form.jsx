@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import './form.css';
+import Booking from "./Booking";
 
 // const getCabData = () => [
 //   { name: 'OLA', price: '10', availability: 'Yes' },
@@ -21,11 +22,11 @@ const AddCity = () => {
     const [mail, setMail] = useState("");
     const [source, setSource] = useState("");
     const [destination, setDestination] = useState("");
-    const [time, setTime] = useState("1970-01-01T00:00:00.000Z")
-
-
+    const [time, setTime] = useState("1970-01-01T00:00:00")
+    const [minTime, setminTime] = useState(0)
+    const [minPath,setminPath]=useState("")
     const [cabData, setCabData] = useState([])
-
+    // const [booking]zz
     const [submitted, setSubmitted] = useState(false);
 
     const handleMailChange = (e) => {
@@ -60,10 +61,27 @@ const AddCity = () => {
                 "http://localhost:8000/api/cabs",
                 config
             );
-            console.log(res.data);
+            // console.log(res.data);
             setCabData(res.data);
         }
         fetchData();
+        async function fetchPath() {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    "v1": source,
+                    "v2": destination,
+                }
+            }
+            const res = await axios.get(
+                "http://localhost:8000/api/paths/sh/",
+                config
+            );
+            //console.log(res.data);
+            setminTime(res.data.time);
+            setminPath(res.data.path)
+        }
+        fetchPath();
         setSubmitted(true);
     }
     return (
@@ -137,6 +155,7 @@ const AddCity = () => {
                                     <button
                                         className='btn btn-primary'
                                         type='submit'
+
                                     >
                                         Submit
                                     </button>
@@ -153,15 +172,15 @@ const AddCity = () => {
                                         <th className="CabTableHeadCell" >Name</th>
                                         <th className="CabTableHeadCell" >Price Per Minute</th>
                                         <th className="CabTableHeadCell" >Availability</th>
+                                        <th className="CabTableHeadCell" >Book</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     
                                           {cabData.map((cab) => (
-                                            <tr key={cab.id}>
-                                                <td>{cab.name}</td>
-                                                <td>{cab.price}</td>
-                                                <td>{cab.id}</td>
+                                        
+                                            <tr key={cab._id}>
+                                                <Booking cab={cab} time={minTime} path={minPath} mailto={mail}/>
                                             </tr>
                                         ))}
                                     

@@ -13,9 +13,11 @@ const getAllPaths = (req, res) => {
 }
 
 const getShortestPath = (req, res) => {
+    if(req.body=={})
+        res.status(404).json({message : "data not found"})
     Path.find()
         .then((todo) => {
-            let path = shortestPath(todo,req.body.v1,req.body.v2);
+            let path = shortestPath(todo,req.headers.v1,req.headers.v2);
             res.status(200).json(path)
         })
         .catch((err) =>
