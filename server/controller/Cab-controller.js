@@ -15,6 +15,16 @@ const getAllCabs = (req, res) => {
         );
 }
 
+const postCreateCabs = (req, res) => {
+    Cab.create(req.body)
+        .then((data) => res.json({ message: "Cab added successfully", data }))
+        .catch((err) =>
+            res
+                .status(400)
+                .json({ message: "Failed to add Cab details", error: err.message })
+        );
+};
+
 
 const putUpdateCabs = (req, res) => {
     Cab.findByIdAndUpdate(req.params.id, req.body)
@@ -27,4 +37,4 @@ const putUpdateCabs = (req, res) => {
 };
 
 
-module.exports = { getAllCabs : getAllCabs, putUpdateCabs : putUpdateCabs } ;
+module.exports = { getAllCabs : getAllCabs, postCreateCabs : postCreateCabs , putUpdateCabs : putUpdateCabs } ;

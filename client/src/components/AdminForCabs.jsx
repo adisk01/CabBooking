@@ -1,17 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Button ,Table} from 'react-bootstrap';
-import CabData from "./CabData";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { Button, Table } from 'react-bootstrap';
+// import CabData from "./CabData";
 import EditEntry from "../Modals/ModalForCabs";
-const cabdata = () =>{
-
-    const handleedit = (price) => {
-        localStorage.setItem('Price' , price);
+const CabData = () => {
+    const [cabData, setCabData] = useState([]);
+  //  const [price , setPrice] = useState(0);
+    useEffect(() => {
+        async function fetchData() {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: {
+                    "time": "1970-01-30T18:30:00.000Z",
+                },
+            };
+            const res = await axios.get(
+                "http://localhost:8000/api/cabs",
+                config
+            );
+            console.log(res.data);
+            setCabData(res.data);
+        }
+        fetchData();
+    }, [])
+    const handleEdit = ()=>{
+         alert("Hi");
     }
+
+    
     return (
-        
         <>
-            <div style={{margin:"10rem"}}>
+            <div style={{ margin: "10rem" }}>
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
@@ -28,36 +52,37 @@ const cabdata = () =>{
                     </thead>
                     <tbody>
                         {
-                            CabData && CabData.length > 0
-                            ?
-                            CabData.map((item)=>{
-                                return (
-                                    <tr>
-                                        <td>
-                                            {item.Name}
-                                        </td>
-                                        <td>
-                                            {item.Endtime}
-                                        </td>
-                                        <td>
-                                            {item.Price}
-                                        </td>
-                                        <td>
-                                        <Button onClick={()=>handleedit(item.Price)}
-                                        >Edit</Button>
+                            cabData && cabData.length > 0
+                                ?
+                                cabData.map((item, idx) => {
+                                    return (
+                                        <tr key={idx}>
+                                            <td>
+                                                {item.name}
+                                            </td>
+                                            <td>
+                                                {item.end_time}
+                                            </td>
+                                            <td>
+                                                {item.price}
+                                            </td>
+                                            <td>
+                                                <Button onClick={() => handleEdit(item)}
+                                                >Edit</Button>
+                                                {/* Hii */}
 
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                            :
-                            "No Data Available"
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                                :
+                                "No Data Available"
                         }
                     </tbody>
                 </Table>
-
             </div>
+
         </>
     )
 }
-export default cabdata;
+export default CabData;

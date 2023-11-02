@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Button ,Table} from 'react-bootstrap';
+import axios from "axios";
 import {Link} from 'react-router-dom'
-import CityData from "./CityData";
+// import CityData from "./CityData";
 import CreateEntry from "../Modals/ModalForCity";
 const Citydata = () =>{
-    const [CityData, setCityData] = useState([]);
-    const addEntry = (newEntry) => {
-    setCityData([...CityData, newEntry]);
-  };
+    const [cityData, setCityData] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            };
+            const res = await axios.get(
+                "http://localhost:8000/api/paths",
+                config
+            );
+            console.log(res.data);
+            setCityData(res.data);
+        }
+        fetchData();
+    }, [])
 
         return (
             <>
@@ -29,19 +43,19 @@ const Citydata = () =>{
                         </thead>
                         <tbody>
                             {
-                                CityData && CityData.length > 0
+                                cityData && cityData.length > 0
                                 ?
-                                CityData.map((item)=>{
+                                cityData.map((item)=>{
                                     return (
                                         <tr>
                                             <td>
-                                                {item.Source}
+                                                {item.v1}
                                             </td>
                                             <td>
-                                                {item.Destination}
+                                                {item.v2}
                                             </td>
                                             <td>
-                                                {item.Time}
+                                                {item.t1}
                                             </td>
                                     
                                         </tr>
@@ -55,7 +69,7 @@ const Citydata = () =>{
                     <br>
                     </br>
                     
-                    <CreateEntry addEntry={addEntry} />
+                    {/* <CreateEntry addEntry={addEntry} /> */}
 
                    
                     

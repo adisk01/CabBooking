@@ -11,10 +11,16 @@ const getAllPaths = (req, res) => {
                 .json({ message: "Todo not found", error: err.message })
         );
 }
-
+const postCreatePath = (req, res) => {
+    Cab.create(req.body)
+        .then((data) => res.json({ message: "Path added successfully", data }))
+        .catch((err) =>
+            res
+                .status(400)
+                .json({ message: "Failed to add Path details", error: err.message })
+        );
+};
 const getShortestPath = (req, res) => {
-    if(req.body=={})
-        res.status(404).json({message : "data not found"})
     Path.find()
         .then((todo) => {
             let path = shortestPath(todo,req.headers.v1,req.headers.v2);
@@ -26,8 +32,6 @@ const getShortestPath = (req, res) => {
                 .json({ message: "Todo not found", error: err.message })
         );
 }
-
-
 const putUpdatePath = (req, res) => {
     Path.findByIdAndUpdate(req.params.id, req.body)
         .then((data) => res.json({ message: "updated successfully", data }))
@@ -37,7 +41,4 @@ const putUpdatePath = (req, res) => {
                 .json({ message: "Failed to update path data", error: err.message })
         );
 };
-
-
-
-module.exports = { getAllPaths : getAllPaths , getShortestPath : getShortestPath, putUpdatePath : putUpdatePath } ;
+module.exports = { getAllPaths : getAllPaths , getShortestPath : getShortestPath, postCreatePath : postCreatePath, putUpdatePath : putUpdatePath } ;

@@ -24,7 +24,7 @@ const AddCity = () => {
     const [destination, setDestination] = useState("");
     const [time, setTime] = useState("1970-01-01T00:00:00")
     const [minTime, setminTime] = useState(0)
-    const [minPath,setminPath]=useState("")
+    const [minPath, setminPath] = useState("")
     const [cabData, setCabData] = useState([])
     // const [booking]zz
     const [submitted, setSubmitted] = useState(false);
@@ -74,7 +74,7 @@ const AddCity = () => {
                 }
             }
             const res = await axios.get(
-                "http://localhost:8000/api/paths/sh/",
+                "http://localhost:8000/api/paths/shortest_path/",
                 config
             );
             //console.log(res.data);
@@ -111,6 +111,23 @@ const AddCity = () => {
                                     <label className='small mb-1' htmlFor='inputSourceCity'>
                                         Select Source City
                                     </label>
+                                    {/* <select
+                                        required={true}
+                                        name='sourceCity'
+                                        className='form-control'
+                                        id='inputSourceCity'
+                                        type='text'
+                                        value={source}
+                                        onChange={handleSourceChange}
+                                        placeholder="Enter Source City"
+                                    >
+                                        <option>A</option>
+                                        <option>B</option>
+                                        <option>C</option>
+                                        <option>D</option>
+                                        <option>E</option>
+                                        <option>F</option>
+                                    </select> */}
                                     <input
                                         required={true}
                                         name='sourceCity'
@@ -136,6 +153,23 @@ const AddCity = () => {
                                         onChange={handleDestinationChange}
                                         placeholder="Enter Destination City"
                                     />
+                                    {/* <select
+                                        required={true}
+                                        name='destinationCity'
+                                        className='form-control'
+                                        id='inputDestinationCity'
+                                        type='text'
+                                        value={destination}
+                                        onChange={handleDestinationChange}
+                                        placeholder="Enter Destination City"
+                                    >
+                                        <option>A</option>
+                                        <option>B</option>
+                                        <option>C</option>
+                                        <option>D</option>
+                                        <option>E</option>
+                                        <option>F</option>
+                                    </select> */}
                                 </div>
                                 <div className='row gx-3 mt-3 mb-3'>
                                     <label className='small mb-1' htmlFor='inputStartTime'>
@@ -176,14 +210,15 @@ const AddCity = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
-                                          {cabData.map((cab) => (
-                                        
-                                            <tr key={cab._id}>
-                                                <Booking cab={cab} time={minTime} path={minPath} mailto={mail}/>
-                                            </tr>
-                                        ))}
-                                    
+
+                                    {cabData.map((cab) => (
+
+                                        <tr key={cab._id}>
+                                            <Booking cab={cab} minTime={minTime} time={time} path={minPath} mailto={mail} />
+
+                                        </tr>
+                                    ))}
+
                                 </tbody>
                             </table>
                         </div>
