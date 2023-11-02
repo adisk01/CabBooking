@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import './form.css';
 import Booking from "./Booking";
-
 // const getCabData = () => [
 //   { name: 'OLA', price: '10', availability: 'Yes' },
 //   { name: 'UBER', price : '11', availability: 'Yes' },
@@ -205,7 +204,7 @@ const AddCity = () => {
                                     <tr>
                                         <th className="CabTableHeadCell" >Name</th>
                                         <th className="CabTableHeadCell" >Price Per Minute</th>
-                                        <th className="CabTableHeadCell" >Availability</th>
+                                        {/* <th className="CabTableHeadCell" >Availability</th> */}
                                         <th className="CabTableHeadCell" >Book</th>
                                     </tr>
                                 </thead>

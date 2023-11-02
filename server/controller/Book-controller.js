@@ -36,9 +36,9 @@ const getAllBookings = (req, res) => {
     
 // };
 
-const postCreateBookinkgs = (req, res) => {
+const postCreateBookings = (req, res) => {
     Book.create(req.body)
-        .then((data) => res.json({ message: "Todo added successfully", data }))
+        .then((data) => res.json({ message: "Bookings added successfully", data }))
         .catch((err) =>
             res
                 .status(400)
@@ -58,4 +58,4 @@ const postCreateBookinkgs = (req, res) => {
 // };
 
 
-module.exports = { getAllBookings: getAllBookings, postCreateBookinkgs : postCreateBookinkgs} ;
+module.exports = { getAllBookings: getAllBookings, postCreateBookings : postCreateBookings} ;

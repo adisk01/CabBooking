@@ -44,6 +44,24 @@ const Booking = ({ cab, minTime, time, path, mailto }) => {
               console.log(res.data);
             }
             fetchPath();
+            async function updateCab() {
+              console.log(p);
+              const  headers = {
+                  "Content-Type": "application/json",
+                  "id":cab.id,
+                  "name":cab.name,
+                  "end_time":p,
+                  "price":cab.price,
+                }
+                console.log(headers);
+              const res = await axios.put(
+                `http://localhost:8000/api/cabs/${cab._id}`,
+                JSON.stringify(headers)
+              );
+              console.log(res.data);
+            }
+            updateCab();
+            
           }
         },
         {
@@ -63,7 +81,7 @@ const Booking = ({ cab, minTime, time, path, mailto }) => {
     <>
       <td>{cab.name}</td>
       <td>{cab.price}</td>
-      <td>{cab.id}</td>
+      {/* <td>{cab.id}</td> */}
       {showmodal && (
         <div className={'modal'}>
           <div className="modal-content">

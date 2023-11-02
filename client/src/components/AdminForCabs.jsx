@@ -28,11 +28,7 @@ const CabData = () => {
         }
         fetchData();
     }, [])
-    const handleEdit = ()=>{
-         alert("Hi");
-    }
-
-    
+ 
     return (
         <>
             <div style={{ margin: "10rem" }}>
@@ -66,12 +62,7 @@ const CabData = () => {
                                             <td>
                                                 {item.price}
                                             </td>
-                                            <td>
-                                                <Button onClick={() => handleEdit(item)}
-                                                >Edit</Button>
-                                                {/* Hii */}
-
-                                            </td>
+                                           
                                         </tr>
                                     )
                                 })

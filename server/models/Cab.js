@@ -10,7 +10,7 @@ const CabSchema = new mongoose.Schema({
         required: true,
     },
     end_time: {
-        type: "Number",
+        type: "Date",
         required: true,
     },
     price: {
