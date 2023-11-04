@@ -3,10 +3,12 @@ const Cab = require("../models/Cab");
 const { availableCabs } = require("../service/getAvailableCabs");
 
 const getAllCabs = (req, res) => {
+    // console.log(req.body);
     Cab.find()
         .then((todo) => {
             let data = availableCabs(todo,req.body.time);
-            res.status(200).json(todo);
+            console.log(data);
+            res.status(200).json(data);
         })
         .catch((err) =>
             res
@@ -27,8 +29,10 @@ const postCreateCabs = (req, res) => {
 
 
 const putUpdateCabs = (req, res) => {
+    // console.log(req.body);
+    // console.log(req.headers);
     Cab.findByIdAndUpdate(req.params.id, req.body)
-        .then((data) => res.json({ message: "updated successfully", data }))
+        .then((data) => res.status(201).json({ message: "updated successfully", data }))
         .catch((err) =>
             res
                 .status(400)

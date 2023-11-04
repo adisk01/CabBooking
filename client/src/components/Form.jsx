@@ -48,17 +48,14 @@ const AddCity = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         async function fetchData() {
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: {
-                    "time": time,
-                },
-            };
-            const res = await axios.get(
+            const  headers = {
+                "time": time,
+              }
+            console.log(headers);
+              
+            const res = await axios.post(
                 "http://localhost:8000/api/cabs",
-                config
+                headers
             );
             // console.log(res.data);
             setCabData(res.data);
@@ -68,8 +65,8 @@ const AddCity = () => {
             const config = {
                 headers: {
                     "Content-Type": "application/json",
-                    "v1": source,
-                    "v2": destination,
+                    "v1": source.toString(),
+                    "v2": destination.toString(),
                 }
             }
             const res = await axios.get(

@@ -4,21 +4,21 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 // import './Booking.css';
 const Booking = ({ cab, minTime, time, path, mailto }) => {
-  const [showmodal, setShowmodal] = useState(false);
-  const minTimeInMillis = minTime * 60000;
+  const [showModal, setShowModal] = useState(false);
+  const minTimeInMillis = (minTime+330) * 60000;
   // let totalcost = cab.price * minTime;
   // Create a new Date object based on the provided 'time'
   const p = new Date(time);
 
   // Add minTimeInMillis to 'p'
   p.setTime(p.getTime() + minTimeInMillis);
-  p.toISOString();
+  p.toISOString().toString();
   let totalcost = cab.price * minTime;
-  console.log(p);
+  // console.log(p);
   const handleClose = () => {
-    setShowmodal(false);
+    setShowModal(false);
   }
-  console.log(mailto);
+  // console.log(mailto);
   const handleConfirm = () => {
     confirmAlert({
       title: 'Confirm Booking',
@@ -37,26 +37,25 @@ const Booking = ({ cab, minTime, time, path, mailto }) => {
                   "source": path[0] + '',
                   "destination": path[path.length - 1] + '',
                 }
+                console.log(headers);
+                setShowModal(false);
               const res = await axios.post(
                 "http://localhost:8000/api/bookings/create",
                 headers
               );
               console.log(res.data);
+              
             }
             fetchPath();
             async function updateCab() {
-              console.log(p);
+              // console.log(p);
               const  headers = {
-                  "Content-Type": "application/json",
-                  "id":cab.id,
-                  "name":cab.name,
-                  "end_time":p,
-                  "price":cab.price,
+                  "end_time": p,
                 }
                 console.log(headers);
               const res = await axios.put(
                 `http://localhost:8000/api/cabs/${cab._id}`,
-                JSON.stringify(headers)
+                headers
               );
               console.log(res.data);
             }
@@ -66,7 +65,7 @@ const Booking = ({ cab, minTime, time, path, mailto }) => {
         },
         {
           label: 'No',
-          onClick: () => (setShowmodal(false))
+          onClick: () => (setShowModal(false))
         }
       ]
     });
@@ -75,14 +74,14 @@ const Booking = ({ cab, minTime, time, path, mailto }) => {
     // let minimumtime = minTime;
     // let shortpath = path;
     // let totalcost = cab.price * minTime;
-    setShowmodal(true);
+    setShowModal(true);
   }
   return (
     <>
       <td>{cab.name}</td>
       <td>{cab.price}</td>
       {/* <td>{cab.id}</td> */}
-      {showmodal && (
+      {showModal && (
         <div className={'modal'}>
           <div className="modal-content">
             <span className="close" onClick={handleClose}>&times;</span>
