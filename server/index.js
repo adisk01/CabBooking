@@ -14,6 +14,7 @@ app.use(cors());
 
 // connect database
 connectDB();//added
+// https://cab-backend.onrender.com
 
 // initialize middleware
 app.use(express.json({ extended: false }));
@@ -28,5 +29,5 @@ app.get("/", (req, res) => res.send("Server up and running"));
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-    console.log(`server is running on http://localhost:${PORT}`);
+    console.log(`server is running`);
 });
