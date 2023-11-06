@@ -13,7 +13,7 @@ const AdminForBookings = () => {
                 }
             };
             const res = await axios.get(
-                "http://localhost:8000/api/bookings",
+                "https://cab-backend.onrender.com/api/bookings",
                 config
             );
             console.log(res.data);

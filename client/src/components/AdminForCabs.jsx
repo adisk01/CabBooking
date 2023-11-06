@@ -20,7 +20,7 @@ const CabData = () => {
                 },
             };
             const res = await axios.get(
-                "http://localhost:8000/api/cabs",
+                "https://cab-backend.onrender.com/api/cabs",
                 config
             );
             console.log(res.data);
