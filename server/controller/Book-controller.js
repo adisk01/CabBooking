@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer")
 
 
 const getAllBookings = (req, res) => {
+    
     Book.find()
         .then((todo) => {
             res.status(200).json(todo);

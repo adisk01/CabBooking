@@ -16,7 +16,7 @@ app.use(cors());
 connectDB();//added
 // https://cab-backend.onrender.com
 
-// initialize middleware
+
 app.use(express.json({ extended: false }));
 
 

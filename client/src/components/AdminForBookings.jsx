@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Button ,Table} from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
+import './adminforbooking.css'
 
 const AdminForBookings = () => {
     const [data, setData] = useState([]);
@@ -16,36 +17,32 @@ const AdminForBookings = () => {
                 "https://cab-backend.onrender.com/api/bookings",
                 config
             );
+
             console.log(res.data);
+
             setData(res.data);
+
         }
+
         fetchData();
     }, [])
     return (
         <>
-            <div>AdminForBookings</div>
+            <div className="container">
+            <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px', color: '#007bff' }}>Booking History
+</div>
+            <div className="table-container">
             <Table striped bordered hover size="sm">
                 <thead>
-                    <tr>
-                        <th>
-                            Mail
-                        </th>
-                        <th>
-                            Start Time
-                        </th>
-                        <th>
-                            End Time
-                        </th>
-                        <th>
-                            Price
-                        </th>
-                        <th>
-                            Source
-                        </th>
-                        <th>
-                            Destination
-                        </th>
+                    <tr className="table-header">
+                        <th>Mail</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Price</th>
+                        <th>Source</th>
+                        <th>Destination</th>
                     </tr>
+
                 </thead>
                 <tbody>
                     {
@@ -81,6 +78,8 @@ const AdminForBookings = () => {
                     }
                 </tbody>
             </Table>
+            </div>
+            </div>
         </>
     )
 }

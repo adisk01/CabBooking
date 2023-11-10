@@ -14,7 +14,7 @@ function App() {
           <Route path="/AdminForCabs" element={<CabData />} />
           <Route path="/AdminForCity" element={<Citydata />} />
           <Route path="/AdminBookings" element = {<AdminForBookings/>}/>
-       
+          
         </Routes>
       </Router>
    </div>

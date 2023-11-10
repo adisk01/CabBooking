@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './ModalForCity.css'
 import uuid from 'react-uuid';
-import CityData from '../components/CityData';
-import { Button } from 'react-bootstrap';
+
 
 const CreateEntry = ({addEntry}) => {
     const [source, setSource] = useState("");

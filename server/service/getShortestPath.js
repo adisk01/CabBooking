@@ -32,7 +32,6 @@ const shortestPath = (edges, source, destination) => {
                 minDistNode = node;
             }
         }
-
         // Mark the node as visited
         visited[minDistNode] = true;
         queue.splice(queue.indexOf(minDistNode), 1);
@@ -48,7 +47,6 @@ const shortestPath = (edges, source, destination) => {
             }
         }
     }
-
     // Reconstruct the shortest path
     const path = [destination];
     let currentNode = destination;

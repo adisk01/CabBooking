@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import './form.css';
 import Booking from "./Booking";
+import { Link } from "react-router-dom";
 // const getCabData = () => [
 //   { name: 'OLA', price: '10', availability: 'Yes' },
 //   { name: 'UBER', price : '11', availability: 'Yes' },
@@ -81,6 +82,7 @@ const AddCity = () => {
         setSubmitted(true);
     }
     return (
+        
         <div className='container-xl px-4'>
             <div className='row mt-3'>
                 <div className='col-xl-8' style={{ margin: "auto" }}>
@@ -230,6 +232,16 @@ const AddCity = () => {
                     }
                 </div>
             </div>
+            <div className='container-xl px-4'>
+        <div className='row mt-3'>
+            <div className='col-xl-8' style={{ margin: "auto" }}>
+                <div className="button-container">
+                    <Link to="/AdminBookings" className="btn btn-secondary">Booking History</Link>
+                </div>
+                {/* ... rest of your code ... */}
+            </div>
+        </div>
+    </div>
         </div>
     );
 }
