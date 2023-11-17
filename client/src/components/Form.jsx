@@ -49,7 +49,7 @@ const AddCity = () => {
             console.log(headers);
               
             const res = await axios.post(
-                "http://localhost:8000/api/users/create",
+                "https://cab-backend.onrender.com/api/users/create",
                 headers
             );
             // console.log(res.data);
@@ -66,7 +66,7 @@ const AddCity = () => {
             console.log(headers);
               
             const res = await axios.post(
-                "http://localhost:8000/api/users/create",
+                "https://cab-backend.onrender.com/api/users/create",
                 headers
             );
             // console.log(res.data);
@@ -84,7 +84,7 @@ const AddCity = () => {
             console.log(headers);
               
             const res = await axios.post(
-                "http://localhost:8000/api/cabs",
+                "https://cab-backend.onrender.com/api/cabs",
                 headers
             );
             // console.log(res.data);
@@ -100,7 +100,7 @@ const AddCity = () => {
                 }
             }
             const res = await axios.get(
-                "http://localhost:8000/api/paths/shortest_path/",
+                "https://cab-backend.onrender.com/api/paths/shortest_path/",
                 config
             );
             //console.log(res.data);
@@ -110,10 +110,10 @@ const AddCity = () => {
         fetchPath();
 
         async function fd() {
-            // console.log(headers);
+            console.log(headers);
               
             const res = await axios.get(
-                `http://localhost:8000/api/users/${mail}`
+                `https://cab-backend.onrender.com/api/users/${mail}`
             );
             // console.log(res.data);
             if(res.data!=null){

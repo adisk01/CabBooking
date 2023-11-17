@@ -3,7 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Table } from 'react-bootstrap';
 import './adminforbooking.css'
-
+const url=""
 const AdminForBookings = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -14,7 +14,7 @@ const AdminForBookings = () => {
                 }
             };
             const res = await axios.get(
-                "http://localhost:8000/api/bookings",
+                "https://cab-backend.onrender.com/api/bookings",
                 config
             );
 
