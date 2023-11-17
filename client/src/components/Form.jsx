@@ -3,19 +3,8 @@ import axios from "axios";
 import './form.css';
 import Booking from "./Booking";
 import { Link } from "react-router-dom";
-// const getCabData = () => [
-//   { name: 'OLA', price: '10', availability: 'Yes' },
-//   { name: 'UBER', price : '11', availability: 'Yes' },
-//   { name: 'RAPIDO', price : '12', availability: 'Yes' },
-//   { name: 'LYFT', price : '13', availability: 'Yes' },
-//   { name: 'BOLT', price : '14', availability: 'Yes' }
-// ];
-
-const getRoute = [
-    "Bombay",
-    "Delhi",
-    "Mumbai"
-];
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const AddCity = () => {
     // Created Variables
@@ -26,8 +15,13 @@ const AddCity = () => {
     const [minTime, setminTime] = useState(0)
     const [minPath, setminPath] = useState("")
     const [cabData, setCabData] = useState([])
+    const [ck1,setck1] = useState(false);
+    const [ck2,setck2] = useState(false);
     // const [booking]zz
     const [submitted, setSubmitted] = useState(false);
+
+    
+    
 
     const handleMailChange = (e) => {
         // e.preventDefault();
@@ -46,6 +40,41 @@ const AddCity = () => {
         setTime(e.target.value);
     }
 
+    const handleCheck1 = ()=>{
+        async function fd() {
+            const  headers = {
+                "email": mail,
+                "service": 2
+              }
+            console.log(headers);
+              
+            const res = await axios.post(
+                "http://localhost:8000/api/users/create",
+                headers
+            );
+            // console.log(res.data);
+            setck1(true);
+        }
+        fd();
+    }
+    const handleCheck2 = ()=>{
+        async function fd() {
+            const  headers = {
+                "email": mail,
+                "service": 5
+              }
+            console.log(headers);
+              
+            const res = await axios.post(
+                "http://localhost:8000/api/users/create",
+                headers
+            );
+            // console.log(res.data);
+            setck2(true);
+        }
+        fd();
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         async function fetchData() {
@@ -55,7 +84,7 @@ const AddCity = () => {
             console.log(headers);
               
             const res = await axios.post(
-                "https://cab-backend.onrender.com/api/cabs",
+                "http://localhost:8000/api/cabs",
                 headers
             );
             // console.log(res.data);
@@ -71,7 +100,7 @@ const AddCity = () => {
                 }
             }
             const res = await axios.get(
-                "https://cab-backend.onrender.com/api/paths/shortest_path/",
+                "http://localhost:8000/api/paths/shortest_path/",
                 config
             );
             //console.log(res.data);
@@ -79,10 +108,35 @@ const AddCity = () => {
             setminPath(res.data.path)
         }
         fetchPath();
+
+        async function fd() {
+            // console.log(headers);
+              
+            const res = await axios.get(
+                `http://localhost:8000/api/users/${mail}`
+            );
+            // console.log(res.data);
+            if(res.data!=null){
+                if(res.data.service==5){
+                    setck2(true);
+                }
+                else{
+                    setck1(true);
+                }
+            }
+        }
+        fd();
+
         setSubmitted(true);
     }
+    const containerStyles = {
+        backgroundImage: 'url("/public/bg.jpg")',
+        backgroundSize: 'cover',
+        minHeight: '100vh',
+      };
+      
     return (
-        
+        <div className='container-xl px-4' style={containerStyles}>
         <div className='container-xl px-4'>
             <div className='row mt-3'>
                 <div className='col-xl-8' style={{ margin: "auto" }}>
@@ -196,6 +250,38 @@ const AddCity = () => {
                         </div>
                     </div>
                     {submitted && (
+                        <>
+                        <table className="CabTable">
+                            <thead className="CabTableHead">
+                                <tr>
+                                    <th className="CabTableHeadCell">Min Time</th>
+                                    <th className="CabTableHeadCell">Path</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{(ck1 || ck2) && minTime}</td>
+                                    <td>{ck2 && minPath}</td>
+                                </tr>
+                                <tr>
+                                    <td>{ck1 || ck2 ||
+                                        <Button variant="primary" type="submit" onClick={handleCheck1}>
+                                            $2
+                                        </Button>
+                                        }   
+                                    </td>
+                                    <td>{ck2 || 
+                                        <Button variant="primary" type="submit" onClick={handleCheck2}>
+                                            $5
+                                        </Button>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>    
+                        </table>
+                        </>
+                    )}
+                    {submitted && ck2 && (
                         <div className='CabList'>
                             <h4>List of Available Cabs:</h4>
                             <table className="CabTable">
@@ -221,7 +307,7 @@ const AddCity = () => {
                             </table>
                         </div>
                     )}
-                    {
+                    {/* {
                         getRoute.forEach(element => {
                             return (
                                 <>
@@ -229,7 +315,7 @@ const AddCity = () => {
                                 </>
                             )
                         })
-                    }
+                    } */}
                 </div>
             </div>
             <div className='container-xl px-4'>
@@ -242,6 +328,7 @@ const AddCity = () => {
             </div>
         </div>
     </div>
+        </div>
         </div>
     );
 }

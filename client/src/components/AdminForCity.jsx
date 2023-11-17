@@ -15,7 +15,7 @@ const Citydata = () =>{
                 }
             };
             const res = await axios.get(
-                "https://cab-backend.onrender.com/api/paths",
+                "http://localhost:8000/api/paths",
                 config
             );
             console.log(res.data);

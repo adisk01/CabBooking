@@ -40,7 +40,7 @@ const Booking = ({ cab, minTime, time, path, mailto }) => {
                 console.log(headers);
                 setShowModal(false);
               const res = await axios.post(
-                "https://cab-backend.onrender.com/api/bookings/create",
+                "http://localhost:8000/api/bookings/create",
                 headers
               );
               console.log(res.data);
@@ -54,7 +54,7 @@ const Booking = ({ cab, minTime, time, path, mailto }) => {
                 }
                 console.log(headers);
               const res = await axios.put(
-                `https://cab-backend.onrender.com/api/cabs/${cab._id}`,
+                `http://localhost:8000/api/cabs/${cab._id}`,
                 headers
               );
               console.log(res.data);
